@@ -3,17 +3,18 @@ export default class Grid {
   #cols;
   #grid = [];
 
-  constructor(rows, cols) {
+  constructor(rows, cols, startLivingPercent) {
     this.#rows = rows;
     this.#cols = cols;
-    this.#initGrid();
+    this.#initGrid(startLivingPercent);
   }
 
-  #initGrid() {
+  #initGrid(startLivingPercent) {
     for (let row = 0; row < this.#rows; row++) {
       this.#grid[row] = [];
       for (let col = 0; col < this.#cols; col++) {
-        this.#grid[row][col] = 0;
+        
+        this.#grid[row][col] = Math.random() <= startLivingPercent ? 1 : 0;
       }
     }
   }
