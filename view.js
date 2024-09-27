@@ -71,10 +71,8 @@ function updateBoard(model) {
 }
 
 function updateCell(cell) {
-  const node = document.querySelector(`[data-row="${cell.row}"][data-col="${cell.col}"]`);
-  if (cell.value) {
-    node.classList.add("alive");
-  } else {
-    node.classList.remove("alive");
-  }
+  // console.log("updating cell:",cell);
+  
+  const node = cellNodes[cell.row][cell.col];
+  node.classList.toggle("alive")
 }

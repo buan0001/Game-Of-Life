@@ -1,3 +1,5 @@
+import * as controller from "./controller.js"
+
 export default class Grid {
   #rows;
   #cols;
@@ -41,11 +43,11 @@ export default class Grid {
     const aliveNeighbours = this.getNeighboursAlive(row, col);
     const oldValue = this.get(row, col);
     if (aliveNeighbours < 2 || aliveNeighbours > 3) {
-      return 0;
+      return { newValue: 0, oldValue};
     } else if (aliveNeighbours == 3) {
-      return 1;
+      return { newValue: 1, oldValue };
     } else {
-      return oldValue;
+      return { newValue: oldValue, oldValue };
     }
   }
 
@@ -55,8 +57,11 @@ export default class Grid {
     for (let row = 0; row < this.#rows; row++) {
       const newRow = [];
       for (let col = 0; col < this.#cols; col++) {
-        const newVal = this.isAlive(row, col);
-        newRow.push(newVal);
+        const {newValue, oldValue} = this.isAlive(row, col);
+        newRow.push(newValue);
+        if (newValue != oldValue){
+          controller.updateViewForCell({row, col})
+        }
       }
       newGrid.push(newRow);
     }

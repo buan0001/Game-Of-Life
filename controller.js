@@ -1,12 +1,13 @@
 import * as view from "./view.js";
 import Grid from "./grid.js";
-export { nextIteration, toggleTimer, clearGame, restartGame, addRandomCells };
+export { nextIteration, toggleTimer, clearGame, restartGame, addRandomCells, updateViewForCell };
 window.addEventListener("load", start);
 
 let model;
 let timer;
 function start() {
-  model = new Grid(30, 100);
+  model = new Grid(100, 200);
+  // model = new Grid(30, 100);
   view.initView(model);
   startGame()
 
@@ -34,7 +35,7 @@ function toggleTimer() {
     nextIteration();
     timer = setInterval(() => {
       nextIteration();
-    }, 50);
+    }, 100);
     return 1;
   }
 }
@@ -46,7 +47,7 @@ function stopTimer() {
 
 function nextIteration() {
   model.createNextGen();
-  view.updateBoard(model);
+  // view.updateBoard(model);
 }
 
 
@@ -61,3 +62,6 @@ function restartGame(){
 }
 
 
+function updateViewForCell(cell){
+  view.updateCell(cell)
+}
