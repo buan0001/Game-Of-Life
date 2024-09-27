@@ -6,17 +6,63 @@ export default class Grid {
   constructor(rows, cols, startLivingPercent) {
     this.#rows = rows;
     this.#cols = cols;
-    this.#initGrid(startLivingPercent);
+    this.initGrid();
   }
 
-  #initGrid(startLivingPercent) {
+  initGrid() {
     for (let row = 0; row < this.#rows; row++) {
       this.#grid[row] = [];
       for (let col = 0; col < this.#cols; col++) {
-        
-        this.#grid[row][col] = Math.random() <= startLivingPercent ? 1 : 0;
+        this.#grid[row][col] = 0;
       }
     }
+  }
+
+  addRandomValues(startLivingPercent, overrideAlives) {
+    for (let row = 0; row < this.#rows; row++) {
+      for (let col = 0; col < this.#cols; col++) {
+        const newAlive = Math.random() <= startLivingPercent ? 1 : 0;
+        if (newAlive) {
+          this.#grid[row][col] = 1;
+        } else if (overrideAlives) {
+          this.#grid[row][col] = 0;
+        }
+      }
+    }
+  }
+
+
+  // Game of life specific
+  getNeighboursAlive(row, col) {
+    const neighbourVals = this.neighbourValues(row, col);
+    return neighbourVals.length;
+  }
+
+  isAlive(row, col) {
+    const aliveNeighbours = this.getNeighboursAlive(row, col);
+    const oldValue = this.get(row, col);
+    if (aliveNeighbours < 2 || aliveNeighbours > 3) {
+      return 0;
+    } else if (aliveNeighbours == 3) {
+      return 1;
+    } else {
+      return oldValue;
+    }
+  }
+
+  createNextGen() {
+    let newGrid = [];
+
+    for (let row = 0; row < this.#rows; row++) {
+      const newRow = [];
+      for (let col = 0; col < this.#cols; col++) {
+        const newVal = this.isAlive(row, col);
+        newRow.push(newVal);
+      }
+      newGrid.push(newRow);
+    }
+
+    this.#grid = newGrid;
   }
 
   // CALL THIS FUNCTION AT THE START OF EVERY FUNCTION THAT ACCEPTS ROWS AND COLS
@@ -73,14 +119,13 @@ export default class Grid {
     const neighbours = [];
     for (let rows = -1; rows <= 1; rows++) {
       for (let cols = -1; cols <= 1; cols++) {
-        
         // Skip (0,0) since it's the starting point
         if (!(rows == 0 && cols == 0)) {
           const currentRow = row - rows;
           const currentCol = col - cols;
           const currentCellValue = this.get(currentRow, currentCol);
 
-          if (currentCellValue != undefined) {
+          if (currentCellValue) {
             neighbours.push({ row: currentRow, col: currentCol });
           }
         }
@@ -92,27 +137,27 @@ export default class Grid {
 
   neighbourValues(row, col) {
     const neighbours = this.neighbours(row, col);
-    const values = neighbours.map(cell => this.get(cell.row, cell.col));
+    const values = neighbours.map((cell) => this.get(cell.row, cell.col));
     return values;
   }
 
   nextInRow(row, col) {
-    return this.getCell(row,col+1);
+    return this.getCell(row, col + 1);
   }
   nextInCol(row, col) {
-    return this.getCell(row+1,col);
+    return this.getCell(row + 1, col);
   }
   north(row, col) {
-    return this.getCell(row-1,col);
+    return this.getCell(row - 1, col);
   }
   south(row, col) {
-    return this.getCell(row+1,col);
+    return this.getCell(row + 1, col);
   }
   west(row, col) {
-    return this.getCell(row,col-1);
+    return this.getCell(row, col - 1);
   }
   east(row, col) {
-    return this.getCell(row,col+1);
+    return this.getCell(row, col + 1);
   }
 
   rows() {

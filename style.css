@@ -1,7 +1,7 @@
 body{
     background-color: grey;
     margin: 0;
-    display: flex;
+    display: grid;
     align-items: center;
     justify-content: center;
 }
@@ -17,4 +17,17 @@ body{
 #grid{
     display: grid;
     grid-template-columns: repeat(var(--GRID_WIDTH), max-content);
+    cursor: pointer;
+}
+
+.alive{
+    background-color: black;
+}
+
+.dead{
+    background-color: white;
+}
+
+#button-container{
+    display: flex;
 }

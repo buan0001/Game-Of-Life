@@ -1,13 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Game of life</title>
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <h2>Game of life!</h2>
+    <div id="button-container">
+      <div><button id="pause-btn">Pause</button></div>
+      <div><button id="add-btn">Add living cells</button></div>
+      <div><button id="next-btn">Next iteration</button></div>
+      <div><button id="clear-btn">Clear</button></div>
+      <div><button id="restart-btn">Restart</button></div>
+    </div>
     <div id="grid"></div>
-</body>
-<script type="module" src="controller.js"></script>
+  </body>
+  <script type="module" src="controller.js"></script>
 </html>
