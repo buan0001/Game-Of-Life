@@ -4,8 +4,9 @@ export { nextIteration, toggleTimer, clearGame, restartGame, addRandomCells };
 window.addEventListener("load", start);
 
 let model;
+let timer;
 function start() {
-  model = new Grid(20, 40, 0.2);
+  model = new Grid(30, 100);
   view.initView(model);
   startGame()
 
@@ -13,14 +14,16 @@ function start() {
   window.model = model;
 }
 
-
-
-function nextIteration() {
-  model.createNextGen();
+function startGame() {
+  model.addRandomValues(0.2, true);
   view.updateBoard(model);
+  toggleTimer();
 }
 
-let timer;
+function addRandomCells() {
+  model.addRandomValues(0.2);
+  view.updateBoard(model);
+}
 
 function toggleTimer() {
   console.log("Timer:", timer);
@@ -31,19 +34,25 @@ function toggleTimer() {
     nextIteration();
     timer = setInterval(() => {
       nextIteration();
-    }, 10);
+    }, 50);
     return 1;
   }
 }
+
 function stopTimer() {
   clearInterval(timer);
   timer = null;
 }
 
+function nextIteration() {
+  model.createNextGen();
+  view.updateBoard(model);
+}
+
+
 function clearGame() {
   model.fill(0);
   view.updateBoard(model)
-  // stopTimer();
 }
 
 function restartGame(){
@@ -51,13 +60,4 @@ function restartGame(){
   startGame()
 }
 
-function startGame(){
-  model.addRandomValues(0.2, true);
-  view.updateBoard(model)
-  toggleTimer()
-}
 
-function addRandomCells(){
-  model.addRandomValues(0.2);
-  view.updateBoard(model)
-}

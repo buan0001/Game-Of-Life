@@ -3,7 +3,7 @@ export default class Grid {
   #cols;
   #grid = [];
 
-  constructor(rows, cols, startLivingPercent) {
+  constructor(rows, cols) {
     this.#rows = rows;
     this.#cols = cols;
     this.initGrid();
@@ -18,11 +18,12 @@ export default class Grid {
     }
   }
 
+  // Game of life specific
   addRandomValues(startLivingPercent, overrideAlives) {
     for (let row = 0; row < this.#rows; row++) {
       for (let col = 0; col < this.#cols; col++) {
-        const newAlive = Math.random() <= startLivingPercent ? 1 : 0;
-        if (newAlive) {
+        const shouldLive = Math.random() <= startLivingPercent ? 1 : 0;
+        if (shouldLive) {
           this.#grid[row][col] = 1;
         } else if (overrideAlives) {
           this.#grid[row][col] = 0;
@@ -31,8 +32,6 @@ export default class Grid {
     }
   }
 
-
-  // Game of life specific
   getNeighboursAlive(row, col) {
     const neighbourVals = this.neighbourValues(row, col);
     return neighbourVals.length;
