@@ -16,28 +16,26 @@ function firstStart() {
 function newBoard(rows, cols) {
   newGrid(rows, cols);
   view.createBoard(model);
-  view.updateBoardSize(model)
+  view.updateBoardSize(model);
   restartGame();
 }
 
-function updateSpeed(speedValue){
+function updateSpeed(speedValue) {
   speed = speedValue;
-  if (timer){
-    stopTimer()
-    toggleTimer()
-
+  if (timer) {
+    stopTimer();
+    toggleTimer();
   }
 }
 
 function newGrid(rows, cols) {
-  // console.log("Rows:", rows, "Cols:", cols);
+  // If invalid input, make sure we default to the start size
   if (!rows || isNaN(rows) || rows < 10 || 300 < rows) {
     rows = 100;
   }
   if (!cols || isNaN(cols) || cols < 10 || 300 < cols) {
     cols = 200;
   }
-  // console.log("Rows:", rows, "Cols:", cols);
   model = new Grid(rows, cols);
 }
 
@@ -53,12 +51,12 @@ function addRandomCells() {
 }
 
 function toggleTimer() {
-  console.log("Timer:", timer);
   if (timer) {
     stopTimer();
     return 0;
   } else {
-    nextIteration();
+    // Unsure what looks best - instant next iteration or wait
+    // nextIteration();
     timer = setInterval(() => {
       nextIteration();
     }, speed);
