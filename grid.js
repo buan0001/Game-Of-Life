@@ -125,8 +125,12 @@ export default class Grid {
       for (let cols = -1; cols <= 1; cols++) {
         // Skip (0,0) since it's the starting point
         if (!(rows == 0 && cols == 0)) {
-          const currentRow = row - rows;
-          const currentCol = col - cols;
+          let currentRow = row - rows;
+          let currentCol = col - cols;
+
+          // IF the neighbours would exceed the border by 1, instead make them go to the other side of the array
+          currentCol = currentCol == -1 ? this.#cols - 1 : currentCol == this.#cols ? 0 : currentCol
+          currentRow = currentRow == -1 ? this.#rows - 1 : currentRow == this.#rows ? 0 : currentRow
           const currentCellValue = this.get(currentRow, currentCol);
 
           if (currentCellValue) {
