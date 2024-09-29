@@ -10,7 +10,8 @@ let speed = 500;
 function firstStart() {
   newGrid();
   view.initView(model, speed);
-  startGame();
+  initGame();
+  toggleTimer();
 }
 
 function newBoard(rows, cols) {
@@ -39,10 +40,9 @@ function newGrid(rows, cols) {
   model = new Grid(rows, cols);
 }
 
-function startGame() {
+function initGame() {
   model.addRandomValues(0.2, true);
   view.updateBoard(model);
-  toggleTimer();
 }
 
 function addRandomCells() {
@@ -55,8 +55,7 @@ function toggleTimer() {
     stopTimer();
     return 0;
   } else {
-    // Unsure what looks best - instant next iteration or wait
-    // nextIteration();
+    nextIteration();
     timer = setInterval(() => {
       nextIteration();
     }, speed);
@@ -71,7 +70,6 @@ function stopTimer() {
 
 function nextIteration() {
   model.createNextGen();
-  // view.updateBoard(model);
 }
 
 function clearGame() {
@@ -80,9 +78,8 @@ function clearGame() {
 }
 
 function restartGame() {
-  stopTimer();
   clearGame();
-  startGame();
+  initGame();
 }
 
 function updateViewForCell(cell) {
