@@ -7,13 +7,22 @@
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <h2>Game of life!</h2>
+    <h1>Game of life!</h1>
     <div id="button-container">
-      <div><button id="pause-btn">Pause</button></div>
-      <div><button id="add-btn">Add living cells</button></div>
-      <div><button id="next-btn">Next iteration</button></div>
-      <div><button id="clear-btn">Clear</button></div>
-      <div><button id="restart-btn">Restart</button></div>
+      <button id="pause-btn">Pause</button>
+      <button id="add-btn">Add living cells</button>
+      <button id="next-btn">Next iteration</button>
+      <button id="clear-btn">Clear</button>
+      <button id="restart-btn">Restart</button>
+    </div>
+    <div id="other-options">
+      <label for="speed">Updates every <span id="refresh-display"></span> ms</label>
+      <input type="range" name="speed" id="speed-input" min="50" max="1000" autocomplete="off"/>
+      <label for="rows">Rows (10-300):</label>
+      <input type="number" name="rows" id="rows-input" min="10" max="300" autocomplete="off"/>
+      <label for="rows">Cols (10-300):</label>
+      <input type="number" name="cols" id="cols-input" min="10" max="300" autocomplete="off"/>
+      <button id="update-btn">Update</button>
     </div>
     <div id="grid"></div>
   </body>

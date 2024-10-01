@@ -1,33 +1,117 @@
-body{
-    background-color: grey;
-    margin: 0;
-    display: grid;
-    align-items: center;
-    justify-content: center;
+/* General styles */
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #6e6565;
 }
 
-.cell{
-    width: 5px;
-    height: 5px;
-    /* width: 15px;
-    height: 15px; */
-    border: 1px black solid;
+h2 {
+  margin-top: 20px;
+  color: #333;
 }
+
+/* Button container styles */
+#button-container {
+  margin: 20px 0;
+}
+
+button {
+  margin: 5px;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  border: none;
+  border-radius: 5px;
+  background-color: #007bff;
+  color: white;
+  transition: background-color 0.3s;
+}
+
+#button-container button:hover {
+  background-color: #0056b3;
+}
+
+/* Input container styles */
+div > label {
+  display: block;
+  margin: 10px 0 5px;
+}
+
+div > input[type="range"],
+div > input[type="number"] {
+  width: 100%;
+  padding: 5px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-sizing: border-box;
+}
+
+/* Grid container styles */
+
 
 #grid{
     display: grid;
     grid-template-columns: repeat(var(--GRID_WIDTH), max-content);
     cursor: pointer;
+    background-color: rgb(216, 212, 212);
+    margin: 1vw;
 }
 
-.alive{
-    background-color: black;
+.cell {
+    /* width: var(--SIZE)px;
+    height: var(--SIZE)px; */
+    /* width: 5px;
+    height: 5px; */
+    border: 1px rgb(19, 18, 18, 0.3) solid ;
 }
 
-.dead{
-    background-color: white;
+.cell.alive {
+  background-color: rgb(22, 19, 19);
 }
 
-#button-container{
-    display: flex;
+#other-options {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 20px 0;
+}
+
+#other-options label {
+  margin: 0;
+}
+
+#other-options input[type="number"] {
+  padding: 10px;
+  border: 1px solid #a74646;
+  border-radius: 5px;
+  box-sizing: border-box;
+  font-size: 16px;
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+
+#other-options input[type="number"]:focus,
+#other-options input[type="range"]:focus {
+  border-color: #28a745;
+  box-shadow: 0 0 5px rgba(40, 167, 69, 0.5);
+}
+
+#other-options button {
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  border: none;
+  border-radius: 5px;
+  background-color: #28a745;
+  color: white;
+  transition: background-color 0.3s;
+}
+
+#other-options button:hover {
+  background-color: #218838;
 }
